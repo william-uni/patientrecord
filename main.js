@@ -24,6 +24,7 @@ function calculateBMI(height, weight) {
 
 function getBMICategory(bmi) {
   const b = parseFloat(bmi);
+  if (isNaN(b)) return "—";
   if (b < 18.5) return "Underweight";
   if (b < 25) return "Normal";
   if (b < 30) return "Overweight";
@@ -94,12 +95,17 @@ Object.keys(validators).forEach(id => {
   input.addEventListener('blur', check);
 });
 
-// --- Add Patient Form Submission ---
+// --- Global Edit State ---
+let editMode = false;
+let editId = null;
+
+// --- Add/Edit Patient Form Submission ---
 document.getElementById('patient-form').addEventListener('submit', e => {
   e.preventDefault();
   const form = e.target;
   let allValid = true;
 
+  // Validate all fields
   Object.keys(validators).forEach(id => {
     const input = document.getElementById(id);
     const result = validators[id](input.value.trim());
@@ -113,10 +119,8 @@ document.getElementById('patient-form').addEventListener('submit', e => {
   if (!allValid) return;
 
   const patients = loadPatients();
-  const newId = patients.length ? Math.max(...patients.map(p => p.id)) + 1 : 1;
-
-  const patient = {
-    id: newId,
+  const data = {
+    id: editMode ? editId : (patients.length ? Math.max(...patients.map(p => p.id)) + 1 : 1),
     firstName: form['first-name'].value.trim(),
     lastName: form['last-name'].value.trim(),
     birthdate: form['birthdate'].value,
@@ -128,10 +132,20 @@ document.getElementById('patient-form').addEventListener('submit', e => {
     healthInfo: form['health-info'].value.trim()
   };
 
-  addPatient(patient);
+  if (editMode) {
+    editPatient(data);
+    editMode = false;
+    editId = null;
+  } else {
+    addPatient(data);
+  }
+
+  // Reset form and clear validation
   form.reset();
   document.querySelectorAll('.error-msg').forEach(e => (e.style.display = 'none'));
   document.querySelectorAll('.invalid').forEach(i => i.classList.remove('invalid'));
+
+  updateAllDisplays();
 });
 
 // --- Search Logic ---
@@ -201,24 +215,8 @@ function editForm(patient) {
   form['email'].value = patient.email;
   form['health-info'].value = patient.healthInfo;
 
-  // Replace submit handler temporarily
-  const handler = e => {
-    e.preventDefault();
-    patient.firstName = form['first-name'].value.trim();
-    patient.lastName = form['last-name'].value.trim();
-    patient.birthdate = form['birthdate'].value;
-    patient.height = parseFloat(form['height'].value);
-    patient.weight = parseFloat(form['weight'].value);
-    patient.sex = form['sex'].value;
-    patient.mobile = form['mobile'].value.trim();
-    patient.email = form['email'].value.trim();
-    patient.healthInfo = form['health-info'].value.trim();
-    editPatient(patient);
-    form.reset();
-    form.removeEventListener('submit', handler);
-  };
-
-  form.addEventListener('submit', handler);
+  editMode = true;
+  editId = patient.id;
 }
 
 // --- Statistics ---
