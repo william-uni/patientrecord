@@ -3,7 +3,7 @@
   --surface: #1e1e1e;
   --primary: #3a7afe;
   --primary-dark: #2f5edb;
-  --accent: #4c90ff; /* extra blue for highlights */
+  --accent: #4c90ff; 
   --text: #e5e5e5;
   --muted: #b0b0b0;
   --card: #1e293b;
@@ -46,7 +46,7 @@ footer {
 /* Main container */
 main {
   display: grid;
-  gap: 2.5rem; /* slightly more space between sections */
+  gap: 2.5rem; 
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
@@ -58,7 +58,7 @@ main {
 /* Form Styles */
 form {
   display: grid;
-  gap: 1.25rem; /* a little more spacing */
+  gap: 1.25rem; 
 }
 
 form label {
@@ -71,7 +71,7 @@ form input,
 form select,
 form textarea {
   width: 100%;
-  padding: 0.65rem 0.85rem; /* slightly bigger for readability */
+  padding: 0.65rem 0.85rem; 
   border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--input-bg);
@@ -85,8 +85,8 @@ form select:focus,
 form textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(58, 122, 254, 0.5); /* stronger blue glow */
-  background: #232323; /* subtle contrast when focused */
+  box-shadow: 0 0 0 2px rgba(58, 122, 254, 0.5); 
+  background: #232323; 
 }
 
 form button {
