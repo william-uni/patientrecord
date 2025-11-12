@@ -34,7 +34,7 @@ function displayPatients() {
     li.innerHTML = 
     `
       <strong>${p.firstName} ${p.lastName}</strong><br>
-      Date Of Birth: ${p.birthdate}<br>
+      Date Of Birth: ${new Date(p.birthdate).toLocaleDateString('en-GB')}<br>
       Height: ${p.height}cm | Weight: ${p.weight}kg<br>
       Sex: ${p.sex}<br>
       Mobile: ${p.mobile}<br>
