@@ -62,10 +62,21 @@
         <button type="submit">Save Patient</button>
       </form>
     </section>
+    
+    <section id="search-section">
+    <h2>Search / Manage Patients</h2>
+    <form id="search-form">
+    <label for="search-query">Search by Name</label>
+    <input type="text" id="search-query" placeholder="Enter first or last name">
+    </form>
+    <ul id="search-results" class="patient-list"></ul>
+    </section>
 
-    <section id="display-section">
-      <h2>Saved Patients</h2>
-      <ul id="patients-list"></ul>
+    <section id="stats-section">
+      <h2>Patient Statistics</h2>
+      <div id="stats-card" class="info-card">
+      <p class="muted">No data yet. Add patients to view statistics.</p>
+      </div>
     </section>
   </main>
 
