@@ -7,21 +7,53 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
+  <header>
     <h1>Patient Record System</h1>
-    <p>null null</p>
   </header>
+
   <main>
-<section class="card">
-<form id="patient-form">
-  <h2>Create Patients</h2>
-<label>First Name</label>
-<input type="hidden"  id="patient-id">
-</form>
-</section>
+    <form id="patient-form">
+      <h2>Add New Patient</h2>
+
+      <label for="first-name">First Name</label>
+      <input type="text" id="first-name" required>
+
+      <label for="last-name">Last Name</label>
+      <input type="text" id="last-name" required>
+
+      <label for="birthdate">Date of Birth</label>
+      <input type="date" id="birthdate" required>
+
+      <label for="height">Height (cm)</label>
+      <input type="number" id="height" min="30" max="200" required>
+
+      <label for="weight">Weight (kg)</label>
+      <input type="number" id="weight" min="1" max="200" required>
+
+      <label for="sex">Sex</label>
+      <select id="sex" required>
+        <option value="">Select...</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+      <label for="mobile">Mobile</label>
+      <input type="tel" id="mobile" placeholder="07xxxxxxxxx" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="health-info">Health Info (optional)</label>
+      <textarea id="health-info" rows="3" placeholder="Any notes..."></textarea>
+
+      <button type="submit">Save Patient</button>
+    </form>
   </main>
+
   <footer>
     <p>&copy; 2025 Patient Record System</p>
   </footer>
-  </body>
+
+  <script src="main.js"></script>
+</body>
 </html>
