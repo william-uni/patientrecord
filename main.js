@@ -31,15 +31,16 @@ function displayPatients() {
 
   list.forEach(p => {
     const li = document.createElement('li');
-    li.innerHTML = `
+    li.innerHTML = 
+    `
       <strong>${p.firstName} ${p.lastName}</strong><br>
-      DOB: ${p.birthdate}<br>
+      Date Of Birth: ${p.birthdate}<br>
       Height: ${p.height}cm | Weight: ${p.weight}kg<br>
       Sex: ${p.sex}<br>
       Mobile: ${p.mobile}<br>
       Email: ${p.email}<br>
       Notes: ${p.healthInfo || '—'}
-    `;
+    `
     ul.appendChild(li);
   });
 }
@@ -51,7 +52,6 @@ document.getElementById('patient-form').addEventListener('submit', e => {
   const form = e.target;
   const patients = loadPatients();
 
-  // Generate a simple numeric ID based on how many patients exist
   const newId = patients.length + 1;
 
   const patient = {
