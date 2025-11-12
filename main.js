@@ -196,9 +196,11 @@ function displaySearchResults(results) {
     const li = document.createElement('li');
     li.innerHTML = `
       <strong>${p.firstName} ${p.lastName}</strong><br>
-      Age: ${age} | Sex: ${p.sex}<br>
+      Age: ${age}<br>
+      Sex: ${p.sex}<br>
       BMI: ${bmi} (${bmiCat})<br>
-      Height: ${p.height}cm | Weight: ${p.weight}kg<br>
+      Height: ${p.height}cm<br>
+      Weight: ${p.weight}kg<br>
       Mobile: ${p.mobile}<br>
       Email: ${p.email}<br>
       Notes: ${p.healthInfo || '—'}<br>
