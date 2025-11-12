@@ -1,0 +1,30 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+header, footer {
+  background: var(--primary);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
+header {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+footer {
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.4);
+}
+
+main {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
