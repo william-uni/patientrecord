@@ -99,6 +99,23 @@ Object.keys(validators).forEach(id => {
 let editMode = false;
 let editId = null;
 
+// --- Visual confirmation helper ---
+function showConfirmation(message = "Patient saved!") {
+  let note = document.getElementById("save-confirm");
+  if (!note) {
+    note = document.createElement("p");
+    note.id = "save-confirm";
+    note.style.color = "#4ade80";
+    note.style.fontWeight = "500";
+    note.style.marginTop = "0.75rem";
+    note.style.textAlign = "center";
+    document.getElementById("patient-form").appendChild(note);
+  }
+  note.textContent = message;
+  note.style.opacity = "1";
+  setTimeout(() => (note.style.opacity = "0"), 1800);
+}
+
 // --- Add/Edit Patient Form Submission ---
 document.getElementById('patient-form').addEventListener('submit', e => {
   e.preventDefault();
@@ -136,8 +153,11 @@ document.getElementById('patient-form').addEventListener('submit', e => {
     editPatient(data);
     editMode = false;
     editId = null;
+    form.querySelector("button[type='submit']").textContent = "Save Patient";
+    showConfirmation("Patient updated successfully!");
   } else {
     addPatient(data);
+    showConfirmation("New patient added!");
   }
 
   // Reset form and clear validation
@@ -217,6 +237,7 @@ function editForm(patient) {
 
   editMode = true;
   editId = patient.id;
+  form.querySelector("button[type='submit']").textContent = "Update Patient";
 }
 
 // --- Statistics ---
