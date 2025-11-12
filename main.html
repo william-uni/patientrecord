@@ -12,42 +12,48 @@
   </header>
 
   <main>
-    <form id="patient-form">
+    <section>
       <h2>Add New Patient</h2>
+      <form id="patient-form">
+        <label>First Name</label>
+        <input type="text" id="first-name" required>
 
-      <label for="first-name">First Name</label>
-      <input type="text" id="first-name" required>
+        <label>Last Name</label>
+        <input type="text" id="last-name" required>
 
-      <label for="last-name">Last Name</label>
-      <input type="text" id="last-name" required>
+        <label>Date of Birth</label>
+        <input type="date" id="birthdate" required>
 
-      <label for="birthdate">Date of Birth</label>
-      <input type="date" id="birthdate" required>
+        <label>Height (cm)</label>
+        <input type="number" id="height" required>
 
-      <label for="height">Height (cm)</label>
-      <input type="number" id="height" min="30" max="200" required>
+        <label>Weight (kg)</label>
+        <input type="number" id="weight" required>
 
-      <label for="weight">Weight (kg)</label>
-      <input type="number" id="weight" min="1" max="200" required>
+        <label>Sex</label>
+        <select id="sex" required>
+          <option value="">Select...</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
 
-      <label for="sex">Sex</label>
-      <select id="sex" required>
-        <option value="">Select...</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
+        <label>Mobile</label>
+        <input type="tel" id="mobile" required>
 
-      <label for="mobile">Mobile</label>
-      <input type="tel" id="mobile" placeholder="07xxxxxxxxx" required>
+        <label>Email</label>
+        <input type="email" id="email" required>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+        <label>Health Info (optional)</label>
+        <textarea id="health-info" rows="3"></textarea>
 
-      <label for="health-info">Health Info (optional)</label>
-      <textarea id="health-info" rows="3" placeholder="Any notes..."></textarea>
+        <button type="submit">Save Patient</button>
+      </form>
+    </section>
 
-      <button type="submit">Save Patient</button>
-    </form>
+    <section id="display-section">
+      <h2>Saved Patients</h2>
+      <ul id="patients-list"></ul>
+    </section>
   </main>
 
   <footer>
