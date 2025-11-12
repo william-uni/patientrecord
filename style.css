@@ -11,16 +11,19 @@
   --input-bg: #1c1c1c;
 }
 
-/* Reset / base */
+/* ====== Reset / base ====== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Header */
+/* ====== Header ====== */
 header {
   display: flex; align-items: center; justify-content: center; gap: 1rem;
   background: var(--surface);
@@ -28,13 +31,17 @@ header {
   border-bottom: 1px solid var(--border);
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
-header .logo { width: 70px; height: auto; }
+header .logo { width: 70px; height: auto; flex: 0 0 auto; }
 header h1 { font-size: 1.6rem; font-weight: 600; }
 
-/* Main 3-column layout */
+/* ====== Main 3-column layout ====== */
+/* minmax() prevents columns from collapsing at certain zoom levels */
 main {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;     /* wider middle column */
+  grid-template-columns:
+    minmax(320px, 1fr)
+    minmax(560px, 2fr)
+    minmax(320px, 1fr);
   gap: 2rem;
   max-width: 1600px;
   margin: 2rem auto;
@@ -50,10 +57,13 @@ section {
   box-shadow: 0 4px 20px rgba(0,0,0,0.45);
   display: flex;
   flex-direction: column;
+  /* prevent grid item overflow when zoom changes */
+  min-width: 0;
+  min-height: 0;
 }
 h2 { text-align: center; margin-bottom: 1rem; color: #fff; }
 
-/* Form */
+/* ====== Form styles ====== */
 form { display: grid; gap: 1rem; }
 form label { font-weight: 500; }
 form input, form select, form textarea {
@@ -80,20 +90,24 @@ form button {
 }
 form button:hover { background: var(--primary-dark); transform: translateY(-1px); }
 
-/* Inline validation */
+/* ====== Inline validation ====== */
 .error-msg { color: #ff5c5c; font-size: 0.85rem; display: none; }
 input.invalid, select.invalid, textarea.invalid { border-color: #ff5c5c !important; }
 
-/* =========================
-   MIDDLE COLUMN (scrolls)
-   ========================= */
+/* ==================================================
+   MIDDLE COLUMN (Search & patient cards) — SCROLLS
+   ================================================== */
 #search-section {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-height: 70vh;         /* scroll only this column */
+
+  /* Make only this column scroll; keep layout stable while zooming */
+  max-height: 70vh;
   overflow-y: auto;
-  padding-right: 0.6rem;    /* room for scrollbar */
+  padding-right: 0.6rem;
+  scrollbar-gutter: stable;       /* avoids layout shift when scrollbar appears */
+  min-height: 0;                  /* allow child overflow to create scroll */
 }
 
 /* Search box */
@@ -106,13 +120,16 @@ input.invalid, select.invalid, textarea.invalid { border-color: #ff5c5c !importa
   color: var(--text);
 }
 
-/* Patient cards grid (no own scroll; parent column handles it) */
+/* Patient cards grid (parent column handles scrolling) */
 #search-results {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1rem;
   margin-top: 0.5rem;
+  align-items: start;
+  /* avoid fractional rounding oddities on zoom */
+  -webkit-text-size-adjust: 100%;
 }
 
 /* Themed scrollbar for the middle column */
@@ -133,8 +150,9 @@ input.invalid, select.invalid, textarea.invalid { border-color: #ff5c5c !importa
   flex-direction: column;
   gap: 0.25rem;
 
-  overflow: hidden;
-  word-break: break-word;
+  overflow: hidden;         /* keep content inside box */
+  word-break: break-word;   /* prevent long text from stretching width */
+  min-width: 0;             /* grid child overflow guard */
 }
 #search-results li strong { font-size: 1.1rem; color: var(--text); }
 
@@ -147,6 +165,7 @@ input.invalid, select.invalid, textarea.invalid { border-color: #ff5c5c !importa
   color: #fff;
   font-size: 0.9rem;
   cursor: pointer;
+  align-self: start;         /* stops stretch on zoom */
 }
 #search-results .edit-btn { background: var(--primary); }
 #search-results .delete-btn { background: #ef4444; }
@@ -154,16 +173,15 @@ input.invalid, select.invalid, textarea.invalid { border-color: #ff5c5c !importa
 #search-results .delete-btn:hover { background: #dc2626; }
 #search-results li button:first-of-type { margin-top: auto; }
 
-/* =========================
-   RIGHT COLUMN (no scroll)
-   ========================= */
-
+/* ===================================
+   RIGHT COLUMN (Statistics) — NO SCROLL
+   =================================== */
 #stats-card {
   background: var(--card);
   padding: 1.25rem;
   border-radius: 10px;
   border: 1px solid var(--border);
-  /* no scrolling here */
+  /* no overflow here */
 }
 
 .stats-grid { display: grid; gap: 0.75rem; margin-bottom: 1rem; }
@@ -176,25 +194,24 @@ input.invalid, select.invalid, textarea.invalid { border-color: #ff5c5c !importa
 .stat-box p { margin: 0.2rem 0; }
 .stat-title { font-weight: 700; color: var(--accent); }
 
+/* Charts layout */
 .charts-container {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+  min-width: 0;   /* guard against canvas overflow */
 }
-
-/* Charts auto-fit the card (no scroll). 
-   Use aspect-ratio to keep them compact & responsive. */
 .charts-container canvas {
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 10;        /* gentle, compact height */
+  aspect-ratio: 16 / 10;              /* compact, responsive */
   background: var(--surface);
   border-radius: 10px;
   padding: 0.6rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-/* Footer */
+/* ====== Footer ====== */
 footer {
   text-align: center;
   color: var(--muted);
@@ -204,8 +221,15 @@ footer {
   border-top: 1px solid var(--border);
 }
 
-/* Responsive */
-@media (max-width: 1200px) {
+/* ====== Responsive safety nets ====== */
+/* extra breakpoint to avoid awkward mid-zoom widths */
+@media (max-width: 1350px) {
   main { grid-template-columns: 1fr; }
   #search-section { max-height: unset; overflow: visible; }
 }
+
+/* final fallback for very narrow screens */
+@media (max-width: 520px) {
+  #search-results { grid-template-columns: 1fr; }
+}
+ 
