@@ -2,6 +2,8 @@
   --bg: #121212;
   --surface: #1e1e1e;
   --primary: #3a7afe;
+  --primary-dark: #2f5edb;
+  --accent: #4c90ff; /* extra blue for highlights */
   --text: #e5e5e5;
   --muted: #b0b0b0;
   --card: #1e293b;
@@ -22,6 +24,7 @@ body {
   line-height: 1.6;
 }
 
+/* Header & Footer */
 header, footer {
   background: var(--surface);
   color: var(--text);
@@ -40,21 +43,22 @@ footer {
   color: var(--muted);
 }
 
+/* Main container */
 main {
   display: grid;
-  gap: 2rem;
+  gap: 2.5rem; /* slightly more space between sections */
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
   background: var(--surface);
   border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
 }
 
 /* Form Styles */
 form {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem; /* a little more spacing */
 }
 
 form label {
@@ -67,13 +71,13 @@ form input,
 form select,
 form textarea {
   width: 100%;
-  padding: 0.6rem 0.75rem;
-  border-radius: 8px;
+  padding: 0.65rem 0.85rem; /* slightly bigger for readability */
+  border-radius: 10px;
   border: 1px solid var(--border);
   background: var(--input-bg);
   color: var(--text);
   font-size: 1rem;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 form input:focus,
@@ -81,22 +85,24 @@ form select:focus,
 form textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(58, 122, 254, 0.3);
+  box-shadow: 0 0 0 2px rgba(58, 122, 254, 0.5); /* stronger blue glow */
+  background: #232323; /* subtle contrast when focused */
 }
 
 form button {
-  padding: 0.75rem;
+  padding: 0.85rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: var(--primary);
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
 }
 
 form button:hover {
-  background: #2f5edb;
+  background: var(--primary-dark);
+  box-shadow: 0 0 12px var(--accent);
   transform: translateY(-2px);
 }
 
@@ -104,27 +110,27 @@ form button:hover {
 #patients-list {
   list-style: none;
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem; 
   padding: 0;
 }
 
 #patients-list li {
   background: var(--card);
-  padding: 1rem 1.25rem;
-  border-radius: 10px;
+  padding: 1.25rem 1.5rem; 
+  border-radius: 12px;
   border: 1px solid var(--border);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 #patients-list li:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.55);
 }
 
 #patients-list li strong {
-  font-size: 1.1rem;
-  color: #fff;
+  font-size: 1.15rem;
+  color: var(--text);
 }
 
 #patients-list li .muted {
@@ -134,6 +140,7 @@ form button:hover {
 /* Section Titles */
 h1, h2 {
   color: #fff;
+  text-align: center;
 }
 
 h2 {
@@ -141,18 +148,19 @@ h2 {
   font-weight: 600;
 }
 
+/* Header logo container */
 header .logo-container {
   display: flex;
   align-items: center;
-  justify-content: center; /* center horizontally */
-  gap: 1rem; /* space between logo and text */
+  justify-content: center;
+  gap: 1rem;
 }
 
 header .logo {
-  width: 80px; /* adjust size to fit neatly */
+  width: 100px;
   height: auto;
-  background: var(--surface); /* match header background */
-  padding: 4px; /* a bit of spacing inside box */
+  background: var(--surface);
+  padding: 4px;
 }
 
 header h1 {
@@ -162,10 +170,13 @@ header h1 {
   color: var(--text);
 }
 
-
 /* Responsive */
 @media (max-width: 600px) {
   main {
     padding: 1rem;
+  }
+  header .logo-container {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
