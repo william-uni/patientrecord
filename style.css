@@ -172,6 +172,17 @@ header h1 {
   margin: 0;
   color: var(--text);
 }
+.error-msg {
+  color: #ff5c5c;
+  font-size: 0.85rem;
+  margin-top: -6px;
+  margin-bottom: 6px;
+  display: none;
+    }
+input.invalid, select.invalid, textarea.invalid {
+  border-color: #ff5c5c !important;
+    }
+
 
 /* Responsive */
 @media (max-width: 600px) {
