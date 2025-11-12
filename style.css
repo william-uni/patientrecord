@@ -141,6 +141,28 @@ h2 {
   font-weight: 600;
 }
 
+header .logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center horizontally */
+  gap: 1rem; /* space between logo and text */
+}
+
+header .logo {
+  width: 80px; /* adjust size to fit neatly */
+  height: auto;
+  background: var(--surface); /* match header background */
+  padding: 4px; /* a bit of spacing inside box */
+}
+
+header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text);
+}
+
+
 /* Responsive */
 @media (max-width: 600px) {
   main {
