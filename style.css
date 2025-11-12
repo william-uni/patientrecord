@@ -110,9 +110,11 @@ form button:hover {
 #patients-list {
   list-style: none;
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
   gap: 1.25rem; 
   padding: 0;
 }
+
 
 #patients-list li {
   background: var(--card);
@@ -155,6 +157,7 @@ header .logo-container {
   justify-content: center;
   gap: 1rem;
 }
+
 
 header .logo {
   width: 100px;
