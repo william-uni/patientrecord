@@ -78,5 +78,3 @@ This project was created as part of a university web development module to demon
 * Data visualisation and styling
 * Modular JavaScript code and structuring
 * Local persistence using LocalStorage
-
-
