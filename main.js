@@ -250,7 +250,7 @@ function updateStatistics() {
 }
 
 function updateAllDisplays() {
-  displaySearchResults(loadPatients());
+  applySearchAndFilters();
   updateStatistics();
 }
-updateAllDisplays();
+
