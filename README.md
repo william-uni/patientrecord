@@ -2,6 +2,7 @@
 This project is a browser-based application for managing patient information. It is built with HTML, CSS, and JavaScript, and uses [Chart.js](https://github.com/chartjs/Chart.js) for basic data visualisation charts.
 
 ## Features
+<img width="1546" height="1429" alt="image" src="https://github.com/user-attachments/assets/d56d969f-2aa3-4d95-a39c-e41ea6d6c08a" />
 
 ### Add and Edit Patients Tab
 
