@@ -205,7 +205,7 @@ document.getElementById("clear-filters").addEventListener("click", () => {
 });
 
 
-// ====== Rendering Patient Cards ======
+// ====== Rendering Patient Cards Functionallity ======
 function displaySearchResults(results) {
   const container = document.getElementById("search-results");
   container.innerHTML = results.length
