@@ -61,14 +61,27 @@
       </form>
     </section>
 
-    <!-- Search Section -->
+       <!-- Search Section -->
     <section id="search-section">
       <h2>Search & Manage Patients</h2>
       <form id="search-form">
-        <input type="text" id="search-query" placeholder="Search by name..." />
+        <input
+          type="text"
+          id="search-query"
+          placeholder="Search by name..."
+        />
+
+        <!-- Simple filter for sex under the search box -->
+        <label for="filter-sex">Filter by gender</label>
+        <select id="filter-sex">
+          <option value="">All patients</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
       </form>
       <ul id="search-results"></ul>
     </section>
+
 
     <!-- Statistics Section -->
     <section id="stats-section">
