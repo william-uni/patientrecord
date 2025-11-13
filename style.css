@@ -11,41 +11,31 @@
   --input-bg: #1c1c1c;
 }
 
-/* ------------------ RESET ------------------ */
+/* ====== Reset ====== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; }
-
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: system-ui, sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* ------------------ HEADER ------------------ */
+/* ====== Header ====== */
 header {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background: var(--surface);
   padding: 1.25rem;
+  background: var(--surface);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
+header .logo { width: 70px; }
+header h1 { font-size: 1.6rem; }
 
-header .logo {
-  width: 70px;
-  height: auto;
-}
-
-header h1 {
-  font-size: 1.6rem;
-  font-weight: 600;
-}
-
-/* ------------------ MAIN LAYOUT ------------------ */
+/* ====== Main Layout ====== */
 main {
   display: grid;
   grid-template-columns:
@@ -53,11 +43,11 @@ main {
     minmax(560px, 2fr)
     minmax(320px, 1fr);
   gap: 2rem;
-  max-width: 1600px;
-  margin: 2rem auto;
   padding: 1.5rem;
-  background: var(--surface);
+  margin: 2rem auto;
+  max-width: 1600px;
   border-radius: 12px;
+  background: var(--surface);
   box-shadow: 0 4px 20px rgba(0,0,0,0.45);
 }
 
@@ -69,89 +59,68 @@ section {
   display: flex;
   flex-direction: column;
   min-width: 0;
-  min-height: 0;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-/* ------------------ FORM ------------------ */
+/* ====== Form Styles ====== */
 form { display: grid; gap: 1rem; }
-
 form label { font-weight: 500; }
 
-form input,
-form select,
-form textarea {
+form input, form select, form textarea {
   width: 100%;
   padding: 0.6rem 0.8rem;
-  border-radius: 8px;
-  border: 1px solid var(--border);
   background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
   color: var(--text);
 }
 
-form input:focus,
-form select:focus,
-form textarea:focus {
+form input:focus, form select:focus, form textarea:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 2px rgba(58,122,254,0.4);
 }
 
 form button {
-  background: var(--primary);
-  color: #fff;
-  border: none;
-  border-radius: 8px;
   padding: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  background: var(--primary);
+  border-radius: 8px;
+  color:#fff;
+  border:none;
+  cursor:pointer;
+  transition:0.2s ease;
 }
+form button:hover { background: var(--primary-dark); transform:translateY(-1px); }
 
-form button:hover {
-  background: var(--primary-dark);
-  transform: translateY(-1px);
-}
-
-/* ------------------ VALIDATION ------------------ */
-.error-msg {
-  color: #ff5c5c;
-  font-size: 0.85rem;
-  display: none;
-}
-
-input.invalid,
-select.invalid,
-textarea.invalid {
-  border-color: #ff5c5c !important;
-}
+/* ====== Validation ====== */
+.error-msg { color:#ff5c5c; font-size:0.85rem; display:none; }
+.invalid { border-color:#ff5c5c !important; }
 
 /* ==========================================================
-   SEARCH COLUMN — FILTERS STICKY + SCROLL STARTS AT RESULTS
+   SEARCH COLUMN — Sticky filters + scroll only on results
    ========================================================== */
 
 #search-section {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  
 
-  /* NO SCROLL HERE ANYMORE */
-  overflow: visible;
+  height: 100%;           /* Middle column gets full vertical space */
+  min-height: 0;          /* Prevent flex overflow */
+  overflow: hidden;       /* Prevent whole column from scrolling */
+
+  gap: 0.75rem;
 }
 
-/* Sticky filter + search container */
+
+/* Sticky top (search + filters) */
 #search-top {
   position: sticky;
   top: 0;
-  z-index: 5;
+  z-index: 10;
   background: var(--surface);
   padding-bottom: 0.5rem;
 }
 
-/* Search bar */
+/* Search box */
 #search-form {
   display: flex;
   flex-direction: column;
@@ -161,11 +130,11 @@ textarea.invalid {
 #search-query {
   padding: 0.6rem 0.8rem;
   border-radius: 8px;
-  border: 1px solid var(--border);
   background: var(--input-bg);
+  border: 1px solid var(--border);
 }
 
-/* ------------------ FILTERS BOX ------------------ */
+/* Filters Box */
 .filters-row {
   display: grid;
   grid-template-rows: repeat(4, auto);
@@ -176,159 +145,131 @@ textarea.invalid {
   border: 1px solid #2b2b2b;
 }
 
-.filters-row .filter-label {
-  font-size: 1rem;
-  color: #ccc;
-  margin-left: 2px;
-}
+.filter-label { font-size: 1rem; color:#ccc; }
 
 .filters-row select {
-  width: 100%;
   padding: 0.45rem 0.6rem;
-  background: #2a2a2a;
-  color: #eee;
-  border: 1px solid #444;
   border-radius: 6px;
-  font-size: 0.9rem;
+  border:1px solid #444;
+  background:#2a2a2a;
+  color:#eee;
 }
 
-/* Clear button */
+/* Clear Filters */
 #clear-filters {
   width: 100%;
   padding: 0.55rem;
-  background: #444;
-  color: #eee;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.15s ease;
+  background:#444;
+  color:#eee;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
 }
+#clear-filters:hover { background:#666; }
 
-#clear-filters:hover {
-  background: #666;
-}
-/* Scroll container for patient cards – now flexible, matching right column */
+/* ==========================================================
+   PATIENT CARDS — scrollable region
+   ========================================================== */
+
 #results-scroll {
-  overflow-y: auto;
-
-  /* Make scroll height fill remaining space in the section */
-  flex: 1;
-
-  /* Add breathing room so sticky filters never overlap */
+  flex: 1;                     /* Take all remaining space */
+  overflow-y: auto;            /* Enable internal scrolling */
+  min-height: 0;               /* Prevent push-out */
   padding-right: 0.6rem;
-  padding-top: 0.25rem;
-
-  /* Smooth scroll with consistent scrollbar start point */
-  margin-top: 0.5rem;
 }
 
-/* Custom scrollbar */
-#results-scroll::-webkit-scrollbar {
-  width: 10px;
-}
+/* Styled scrollbar */
+#results-scroll::-webkit-scrollbar { width: 10px; }
 #results-scroll::-webkit-scrollbar-track {
-  background: #1b1b1b;
+  background:#1b1b1b;
   border-radius: 8px;
 }
 #results-scroll::-webkit-scrollbar-thumb {
-  background: var(--primary-dark);
+  background:var(--primary-dark);
   border-radius: 8px;
 }
 #results-scroll::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
+  background:var(--primary);
 }
 
 
-/* Cards grid */
+/* Cards Grid */
 #search-results {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
-  margin-top: 0.5rem;
+  list-style:none;
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap:1rem;
 }
 
-/* Patient Card */
+/* Card */
 #search-results li {
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  word-break: break-word;
+  border:1px solid var(--border);
+  padding:1rem;
+  border-radius:10px;
+  display:flex;
+  flex-direction:column;
+  gap:0.25rem;
+  box-shadow:0 2px 10px rgba(0,0,0,0.35);
 }
 
-#search-results li strong {
-  font-size: 1.1rem;
-}
+#search-results li strong { font-size: 1.1rem; }
 
-/* Buttons inside card */
+/* Buttons */
 #search-results button {
-  border: none;
-  border-radius: 6px;
-  padding: 0.45rem 0.8rem;
-  color: #fff;
-  font-size: 0.9rem;
-  cursor: pointer;
+  padding:0.45rem 0.8rem;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  color:#fff;
 }
+.edit-btn { background:var(--primary); }
+.delete-btn { background:#ef4444; }
+.edit-btn:hover { background:var(--primary-dark); }
+.delete-btn:hover { background:#dc2626; }
 
-#search-results .edit-btn { background: var(--primary); }
-#search-results .delete-btn { background: #ef4444; }
-
-#search-results .edit-btn:hover { background: var(--primary-dark); }
-#search-results .delete-btn:hover { background: #dc2626; }
-
-/* ---------------- RIGHT COLUMN (stats) ---------------- */
+/* ====== Stats Column ====== */
 #stats-card {
   background: var(--card);
-  padding: 1.25rem;
-  border-radius: 10px;
-  border: 1px solid var(--border);
+  padding:1.25rem;
+  border-radius:10px;
+  border:1px solid var(--border);
 }
 
-.stats-grid { display: grid; gap: 0.75rem; margin-bottom: 1rem; }
+.stats-grid { display:grid; gap:0.75rem; margin-bottom:1rem; }
 
 .stat-box {
-  background: var(--surface);
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  padding: 0.75rem 1rem;
+  padding:0.75rem 1rem;
+  background:var(--surface);
+  border-radius:8px;
+  border:1px solid var(--border);
 }
 
-.stat-title { font-weight: 700; color: var(--accent); }
+.stat-title { font-weight:700; color:var(--accent); }
 
 /* Charts */
-.charts-container {
-  display: grid;
-  gap: 1rem;
-}
-
+.charts-container { display:grid; gap:1rem; }
 .charts-container canvas {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  background: var(--surface);
-  border-radius: 10px;
-  padding: 0.6rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  width:100%;
+  aspect-ratio:16/10;
+  border-radius:10px;
+  padding:0.6rem;
+  background:var(--surface);
 }
 
-/* ------------------ FOOTER ------------------ */
+/* ====== Footer ====== */
 footer {
-  text-align: center;
-  padding: 1rem;
-  background: var(--surface);
-  color: var(--muted);
+  text-align:center;
+  padding:1rem;
+  background:var(--surface);
+  color:var(--muted);
 }
 
-/* ------------------ RESPONSIVE ------------------ */
-@media (max-width: 1350px) {
-  main { grid-template-columns: 1fr; }
+/* ====== Responsive ====== */
+@media (max-width:1350px) {
+  main { grid-template-columns:1fr; }
 }
 
-@media (max-width: 520px) {
-  #search-results { grid-template-columns: 1fr; }
+@media (max-width:520px) {
+  #search-results { grid-template-columns:1fr; }
 }
