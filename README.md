@@ -11,6 +11,7 @@ This project is a browser-based application for managing patient information. It
 
 ### Search and Manage Tab
 * Live search allows to find patients by name.
+* Search also allows filtering by gender
 * Each patient card displays:
   * Age (calculated automatically)
   * BMI and BMI category (with colour coding)
