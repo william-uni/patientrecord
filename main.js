@@ -225,7 +225,7 @@ function displaySearchResults(results) {
       <strong>${p.firstName} ${p.lastName}</strong>
       Age: ${calculateAge(p.birthdate)} | ${formatDateUK(p.birthdate)}<br>
       Sex: ${p.sex}<br>
-      BMI: <span style="color:${color}">${bmi} (${cat})</span><br>
+      BMI: <span style="color:${color}">${bmi} (${cat})</span>
       Height: ${p.height}cm<br>
       Weight: ${p.weight}kg<br>
       Mobile: ${p.mobile}<br>
