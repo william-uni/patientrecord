@@ -232,4 +232,64 @@ footer {
 @media (max-width: 520px) {
   #search-results { grid-template-columns: 1fr; }
 }
- 
+/* --- FILTERS ROW LAYOUT FIX --- */
+
+.filters-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #1d1d1d;
+  border-radius: 8px;
+  border: 1px solid #2b2b2b;
+}
+
+/* Labels above each dropdown */
+.filters-row .filter-label {
+  font-size: 0.75rem;
+  color: #ccc;
+  margin-bottom: -4px;
+  margin-left: 2px;
+}
+
+/* Dropdowns */
+.filters-row select {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  background: #2a2a2a;
+  color: #eee;
+  border: 1px solid #444;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+/* Clear Filters button */
+#clear-filters {
+  width: 100%;
+  padding: 0.55rem;
+  background: #444;
+  color: #eee;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#clear-filters:hover {
+  background: #666;
+}
+
+/* Responsive stacking for small screens */
+@media (max-width: 720px) {
+  .filters-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .filters-row {
+    grid-template-columns: 1fr;
+  }
+}
