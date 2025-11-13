@@ -232,11 +232,11 @@ footer {
 @media (max-width: 520px) {
   #search-results { grid-template-columns: 1fr; }
 }
-/* --- FILTERS ROW LAYOUT FIX --- */
+/* --- FILTERS ROW LAYOUT --- */
 
 .filters-row {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(0, 1fr));
   gap: 0.75rem;
   margin-top: 0.75rem;
   padding: 0.75rem;
@@ -247,7 +247,7 @@ footer {
 
 /* Labels above each dropdown */
 .filters-row .filter-label {
-  font-size: 0.75rem;
+  font-size: 1rem;
   color: #ccc;
   margin-bottom: -4px;
   margin-left: 2px;
@@ -271,10 +271,12 @@ footer {
   background: #444;
   color: #eee;
   border: none;
-  border-radius: 6px;
+  border-radius: px;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background 0.15s ease;
+  align-items: center;
+  justify-content: center;
 }
 
 #clear-filters:hover {
