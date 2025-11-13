@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Patient Record System</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png+xml" href="Logo.png">
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
 </head>
 <body>
   <header>
-    <img src="Logo.png" alt="Logo" class="logo" />
+    <img src="logo.png" alt="Logo" class="logo" />
     <h1>Patient Record System</h1>
   </header>
 
@@ -18,27 +18,27 @@
     <section id="patient-form-section">
       <h2>Add / Edit Patient</h2>
       <form id="patient-form">
-        <label>First Name</label>
+        <label for="first-name">First Name</label>
         <input type="text" id="first-name" />
         <span id="first-name-error" class="error-msg"></span>
 
-        <label>Last Name</label>
+        <label for="last-name">Last Name</label>
         <input type="text" id="last-name" />
         <span id="last-name-error" class="error-msg"></span>
 
-        <label>Date of Birth</label>
+        <label for="birthdate">Date of Birth</label>
         <input type="date" id="birthdate" />
         <span id="birthdate-error" class="error-msg"></span>
 
-        <label>Height (cm)</label>
+        <label for="height">Height (cm)</label>
         <input type="number" id="height" />
         <span id="height-error" class="error-msg"></span>
 
-        <label>Weight (kg)</label>
+        <label for="weight">Weight (kg)</label>
         <input type="number" id="weight" />
         <span id="weight-error" class="error-msg"></span>
 
-        <label>Sex</label>
+        <label for="sex">Sex</label>
         <select id="sex">
           <option value="">Select...</option>
           <option value="Male">Male</option>
@@ -46,42 +46,72 @@
         </select>
         <span id="sex-error" class="error-msg"></span>
 
-        <label>Mobile</label>
+        <label for="mobile">Mobile</label>
         <input type="text" id="mobile" />
         <span id="mobile-error" class="error-msg"></span>
 
-        <label>Email</label>
+        <label for="email">Email</label>
         <input type="email" id="email" />
         <span id="email-error" class="error-msg"></span>
 
-        <label>Notes</label>
+        <label for="health-info">Notes</label>
         <textarea id="health-info"></textarea>
 
         <button type="submit">Save Patient</button>
       </form>
     </section>
 
-       <!-- Search Section -->
+    <!-- Search Section -->
     <section id="search-section">
       <h2>Search & Manage Patients</h2>
+
       <form id="search-form">
         <input
           type="text"
           id="search-query"
           placeholder="Search by name..."
+          aria-label="Search by name"
         />
 
-        <!-- Simple filter for sex under the search box -->
-        <label for="filter-sex">Filter by gender</label>
-        <select id="filter-sex">
-          <option value="">All patients</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
+        <!-- Filters row under search box -->
+        <div class="filters-row">
+          <label class="filter-label" for="filter-sex">Sex</label>
+          <select id="filter-sex">
+            <option value="">All</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+
+          <label class="filter-label" for="filter-age">Age group</label>
+          <select id="filter-age">
+            <option value="">All</option>
+            <option value="0 to 9">0 to 9</option>
+            <option value="10 to 19">10 to 19</option>
+            <option value="20 to 29">20 to 29</option>
+            <option value="30 to 39">30 to 39</option>
+            <option value="40 to 49">40 to 49</option>
+            <option value="50 to 59">50 to 59</option>
+            <option value="60 to 69">60 to 69</option>
+            <option value="70 to 79">70 to 79</option>
+            <option value="80 to 89">80 to 89</option>
+            <option value="90+">90+</option>
+          </select>
+
+          <label class="filter-label" for="filter-bmi">BMI category</label>
+          <select id="filter-bmi">
+            <option value="">All</option>
+            <option value="Underweight">Underweight</option>
+            <option value="Normal">Normal</option>
+            <option value="Overweight">Overweight</option>
+            <option value="Obese">Obese</option>
+          </select>
+
+          <button type="button" id="clear-filters">Clear filters</button>
+        </div>
       </form>
+
       <ul id="search-results"></ul>
     </section>
-
 
     <!-- Statistics Section -->
     <section id="stats-section">
@@ -105,9 +135,9 @@
   <footer>
     <p>© 2025 Patient Record System</p>
   </footer>
-<script src="chart.umd.js"></script>
-<script src="charts.js"></script>
-<script src="main.js"></script>
 
+  <script src="chart.umd.js"></script>
+  <script src="charts.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
