@@ -135,20 +135,47 @@ document.getElementById('patient-form').addEventListener('submit', e => {
   updateAllDisplays();
 });
 
-// --- Search ---
-document.getElementById('search-query').addEventListener('input', () => {
-  const q = document.getElementById('search-query').value.trim().toLowerCase();
-  const results = loadPatients().filter(p =>
-    p.firstName.toLowerCase().includes(q) || p.lastName.toLowerCase().includes(q)
-  );
+// --- Search + Filters ---
+
+// Central function that applies both text search and dropdown filters.
+function applySearchAndFilters() {
+  const queryInput = document.getElementById("search-query");
+  const sexSelect = document.getElementById("filter-sex");
+
+  const q = queryInput.value.trim().toLowerCase();
+  const sexFilter = sexSelect ? sexSelect.value : "";
+
+  const list = loadPatients();
+
+  const results = list.filter((p) => {
+    const matchesName =
+      !q ||
+      p.firstName.toLowerCase().includes(q) ||
+      p.lastName.toLowerCase().includes(q);
+
+    const matchesSex = !sexFilter || p.sex === sexFilter;
+
+    return matchesName && matchesSex;
+  });
+
   displaySearchResults(results);
-});
+}
+
+document
+  .getElementById("search-query")
+  .addEventListener("input", applySearchAndFilters);
+
+const sexFilterEl = document.getElementById("filter-sex");
+if (sexFilterEl) {
+  sexFilterEl.addEventListener("change", applySearchAndFilters);
+}
 
 function displaySearchResults(results) {
-  const container = document.getElementById('search-results');
+  const container = document.getElementById("search-results");
   container.innerHTML = results.length
-    ? ''
+    ? ""
     : '<li class="muted">No matching patients.</li>';
+
 
   results.forEach(p => {
     const bmi = calculateBMI(p.height, p.weight);
