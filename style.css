@@ -94,15 +94,14 @@ form button:hover { background: var(--primary-dark); transform: translateY(-1px)
 .error-msg { color: #ff5c5c; font-size: 0.85rem; display: none; }
 input.invalid, select.invalid, textarea.invalid { border-color: #ff5c5c !important; }
 
-/* ==================================================
-   MIDDLE COLUMN (Search & patient cards) — SCROLLS
-   ================================================== */
+
+
 #search-section {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 
-  /* Make only this column scroll; keep layout stable while zooming */
+ 
   max-height: 70vh;
   overflow-y: auto;
   padding-right: 0.6rem;
@@ -210,6 +209,7 @@ input.invalid, select.invalid, textarea.invalid { border-color: #ff5c5c !importa
   padding: 0.6rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
+
 
 /* ====== Footer ====== */
 footer {
