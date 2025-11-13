@@ -8,6 +8,11 @@ function savePatients(list) {
 }
 
 // --- Utility ---
+function formatDateUK(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-GB"); // DD/MM/YYYY
+}
+
 function calculateAge(birthdate) {
   const dob = new Date(birthdate);
   return Math.floor((Date.now() - dob.getTime()) / (365.25 * 24 * 60 * 60 * 1000));
@@ -111,7 +116,7 @@ document.getElementById('patient-form').addEventListener('submit', e => {
     sex: form['sex'].value,
     mobile: form['mobile'].value.trim(),
     email: form['email'].value.trim(),
-    healthInfo: form['health-info'].value.trim()
+    healthInfo: form['health-info'].value.trim() 
   };
 
   if (editMode) {
@@ -153,7 +158,7 @@ function displaySearchResults(results) {
     const li = document.createElement('li');
     li.innerHTML = `
       <strong>${p.firstName} ${p.lastName}</strong>
-      Age: ${calculateAge(p.birthdate)}<br>
+      Age: ${calculateAge(p.birthdate)} | ${formatDateUK(p.birthdate)}<br>
       Sex: ${p.sex}<br>
       BMI: <span style="color:${color}">${bmi} (${cat})</span>
       Height: ${p.height}cm<br>
