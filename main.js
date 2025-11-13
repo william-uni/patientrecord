@@ -279,7 +279,7 @@ function displaySearchResults(results) {
 
     const li = document.createElement("li");
     li.innerHTML = `
-      <strong>${p.firstName} ${p.lastName}</strong><br>
+      <strong>${p.firstName} ${p.lastName}</strong>
       Age: ${calculateAge(p.birthdate)} | ${formatDateUK(p.birthdate)}<br>
       Sex: ${p.sex}<br>
       BMI: <span style="color:${color}">${bmi} (${cat})</span>
