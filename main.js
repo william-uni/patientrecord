@@ -184,18 +184,25 @@ if (sexFilterEl) {
 
 function displaySearchResults(results) {
   const container = document.getElementById("search-results");
+
+  // Clear old results, or show a simple empty-state message
   container.innerHTML = results.length
     ? ""
     : '<li class="muted">No matching patients.</li>';
 
-
-  results.forEach(p => {
+  results.forEach((p) => {
+    // Pre-calc BMI and category so template stays tidy
     const bmi = getPatientBMI(p);
     const cat = getPatientCategory(p);
 
-    let color = cat === "Normal" ? "#4ade80" : cat === "Overweight" ? "#facc15" : "#ef4444";
+    // Light traffic-light style colouring for BMI category
+    const color =
+      cat === "Normal" ? "#4ade80" :
+      cat === "Overweight" ? "#facc15" :
+      "#ef4444"; // underweight or obese
 
-    const li = document.createElement('li');
+    // Build patient card as an <li>
+    const li = document.createElement("li");
     li.innerHTML = `
       <strong>${p.firstName} ${p.lastName}</strong>
       Age: ${calculateAge(p.birthdate)} | ${formatDateUK(p.birthdate)}<br>
@@ -205,17 +212,25 @@ function displaySearchResults(results) {
       Weight: ${p.weight}kg<br>
       Mobile: ${p.mobile}<br>
       Email: ${p.email}<br>
-      Notes: ${p.healthInfo || '—'}<br>
+      Notes: ${p.healthInfo || "N/A"}<br>
       <button class="edit-btn">Edit</button>
       <button class="delete-btn">Delete</button>
     `;
-    li.querySelector('.edit-btn').onclick = () => editForm(p);
-    li.querySelector('.delete-btn').onclick = () => {
-      if (confirm(`Delete ${p.firstName} ${p.lastName}?`)) deletePatient(p.id);
+
+    // Edit button fills the form with the patient data
+    li.querySelector(".edit-btn").onclick = () => editForm(p);
+
+    // Delete button removes patient with a simple confirmation step
+    li.querySelector(".delete-btn").onclick = () => {
+      if (confirm(`Delete ${p.firstName} ${p.lastName}?`)) {
+        deletePatient(p.id);
+      }
     };
+
     container.appendChild(li);
   });
 }
+
 
 // --- Edit ---
 function editForm(patient) {
