@@ -251,30 +251,58 @@ function editForm(patient) {
 // --- Statistics ---
 function updateStatistics() {
   const list = loadPatients();
-  const stats = {
-    male: list.filter(p => p.sex === 'Male'),
-    female: list.filter(p => p.sex === 'Female'),
-  };
-  const avg = arr => arr.length
-    ? (arr.reduce((s, p) => s + parseFloat(getPatientBMI(p)), 0) / arr.length).toFixed(1)
-    : '—';
 
+  // Helper to compute BMI once per patient
+  const enriched = list.map(p => {
+    const bmi = calculateBMI(p.height, p.weight);
+    return {
+      ...p,
+      bmi: bmi,
+      bmiCat: getBMICategory(bmi),
+      age: calculateAge(p.birthdate)
+    };
+  });
+
+  // Grouping
+  const male = enriched.filter(p => p.sex === "Male");
+  const female = enriched.filter(p => p.sex === "Female");
+
+  // Average helper
+  const avg = group => 
+    group.length
+      ? (group.reduce((s, p) => s + parseFloat(p.bmi), 0) / group.length).toFixed(1)
+      : "—";
+
+  // BMI category totals
   const bmiData = {
-  under: list.filter(p => getPatientCategory(p) === 'Underweight').length,
-  normal: list.filter(p => getPatientCategory(p) === 'Normal').length,
-  over: list.filter(p => getPatientCategory(p) === 'Overweight').length,
-  obese: list.filter(p => getPatientCategory(p) === 'Obese').length
+    under: enriched.filter(p => p.bmiCat === "Underweight").length,
+    normal: enriched.filter(p => p.bmiCat === "Normal").length,
+    over: enriched.filter(p => p.bmiCat === "Overweight").length,
+    obese: enriched.filter(p => p.bmiCat === "Obese").length
   };
-  const totalFem50 = stats.female.filter(p => calculateAge(p.birthdate) >= 50).length;
 
+  // Additional stat
+  const totalFem50 = female.filter(p => p.age >= 50).length;
+
+  // Update DOM
   document.getElementById('avg-bmi').innerHTML =
-    `<p><b>Avg BMI (M):</b> <span>${avg(stats.male)}</span><br><b>Avg BMI (F):</b> <span>${avg(stats.female)}</span></p>`;
-  document.getElementById('bmi-categories').innerHTML =
-    `<p><b>BMI Categories:</b><br>Underweight: ${bmiData.under}, Normal: ${bmiData.normal}, Overweight: ${bmiData.over}, Obese: ${bmiData.obese}</p>`;
-  document.getElementById('totals').innerHTML =
-    `<p><b>Total Patients:</b> ${list.length}<br><b>Females ≥50:</b> ${totalFem50}</p>`;
+    `<p><b>Avg BMI (M):</b> <span>${avg(male)}</span><br><b>Avg BMI (F):</b> <span>${avg(female)}</span></p>`;
 
-  updateCharts(bmiData, stats);
+  document.getElementById('bmi-categories').innerHTML =
+    `<p><b>BMI Categories:</b><br>
+      Underweight: ${bmiData.under}, 
+      Normal: ${bmiData.normal}, 
+      Overweight: ${bmiData.over}, 
+      Obese: ${bmiData.obese}
+    </p>`;
+
+  document.getElementById('totals').innerHTML =
+    `<p><b>Total Patients:</b> ${list.length}<br>
+       <b>Females ≥50:</b> ${totalFem50}
+     </p>`;
+
+  // Call charts 
+  updateCharts(bmiData, { male, female });
 }
 
 function updateAllDisplays() {
