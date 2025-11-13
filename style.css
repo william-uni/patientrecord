@@ -95,23 +95,21 @@ form button:hover { background: var(--primary-dark); transform:translateY(-1px);
 .invalid { border-color:#ff5c5c !important; }
 
 /* ==========================================================
-   SEARCH COLUMN — Sticky filters + scroll only on results
+   SEARCH COLUMN — Sticky filters + scrollable patient cards
    ========================================================== */
 
 #search-section {
   display: flex;
   flex-direction: column;
-  
 
-  height: 100%;           /* Middle column gets full vertical space */
-  min-height: 0;          /* Prevent flex overflow */
-  overflow: hidden;       /* Prevent whole column from scrolling */
+  height: 100%;       /* Fill vertical grid space */
+  min-height: 0;      /* Allow internal scroll */
+  overflow: hidden;   /* Prevent entire column from scrolling */
 
   gap: 0.75rem;
 }
 
-
-/* Sticky top (search + filters) */
+/* Sticky search & filters box */
 #search-top {
   position: sticky;
   top: 0;
@@ -134,7 +132,7 @@ form button:hover { background: var(--primary-dark); transform:translateY(-1px);
   border: 1px solid var(--border);
 }
 
-/* Filters Box */
+/* ====== Filter Box ====== */
 .filters-row {
   display: grid;
   grid-template-rows: repeat(4, auto);
@@ -168,17 +166,17 @@ form button:hover { background: var(--primary-dark); transform:translateY(-1px);
 #clear-filters:hover { background:#666; }
 
 /* ==========================================================
-   PATIENT CARDS — scrollable region
+    Scrollable Results Area
    ========================================================== */
 
 #results-scroll {
-  flex: 1;                     /* Take all remaining space */
-  overflow-y: auto;            /* Enable internal scrolling */
-  min-height: 0;               /* Prevent push-out */
+  flex: 1;            /* Take remaining space in column */
+  overflow-y: auto;   /* Enable scrolling */
+  min-height: 0;      /* Prevent push-out */
   padding-right: 0.6rem;
 }
 
-/* Styled scrollbar */
+/* Scrollbar */
 #results-scroll::-webkit-scrollbar { width: 10px; }
 #results-scroll::-webkit-scrollbar-track {
   background:#1b1b1b;
@@ -192,8 +190,7 @@ form button:hover { background: var(--primary-dark); transform:translateY(-1px);
   background:var(--primary);
 }
 
-
-/* Cards Grid */
+/* ====== Patient Cards Grid ====== */
 #search-results {
   list-style:none;
   display:grid;
@@ -201,7 +198,6 @@ form button:hover { background: var(--primary-dark); transform:translateY(-1px);
   gap:1rem;
 }
 
-/* Card */
 #search-results li {
   background: var(--card);
   border:1px solid var(--border);
@@ -215,7 +211,7 @@ form button:hover { background: var(--primary-dark); transform:translateY(-1px);
 
 #search-results li strong { font-size: 1.1rem; }
 
-/* Buttons */
+/* Buttons inside cards */
 #search-results button {
   padding:0.45rem 0.8rem;
   border:none;
@@ -249,6 +245,7 @@ form button:hover { background: var(--primary-dark); transform:translateY(-1px);
 
 /* Charts */
 .charts-container { display:grid; gap:1rem; }
+
 .charts-container canvas {
   width:100%;
   aspect-ratio:16/10;
