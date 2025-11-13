@@ -78,9 +78,7 @@ function showConfirmation(msg) {
     document.getElementById("patient-form").appendChild(note);
   }
   note.textContent = msg;
-
   note.style.color = "#4ade80";
-
   note.style.opacity = "1";
   setTimeout(() => (note.style.opacity = "0"), 1800);
 }
