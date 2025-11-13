@@ -28,6 +28,18 @@ function getBMICategory(bmi) {
   if (b < 30) return "Overweight";
   return "Obese";
 }
+// Computes BMI directly from a patient object.
+// Easier to read than repeating height/weight logic.
+function getPatientBMI(p) {
+  return calculateBMI(p.height, p.weight);
+}
+
+// Gets the BMI category for a patient using the helper above.
+// Keeps the meaning of the code clear when filtering and counting.
+function getPatientCategory(p) {
+  return getBMICategory(getPatientBMI(p));
+}
+
 
 // --- Core ---
 function addPatient(p) {
@@ -178,8 +190,9 @@ function displaySearchResults(results) {
 
 
   results.forEach(p => {
-    const bmi = calculateBMI(p.height, p.weight);
-    const cat = getBMICategory(bmi);
+    const bmi = getPatientBMI(p);
+    const cat = getPatientCategory(p);
+
     let color = cat === "Normal" ? "#4ade80" : cat === "Overweight" ? "#facc15" : "#ef4444";
 
     const li = document.createElement('li');
@@ -228,14 +241,14 @@ function updateStatistics() {
     female: list.filter(p => p.sex === 'Female'),
   };
   const avg = arr => arr.length
-    ? (arr.reduce((s, p) => s + parseFloat(calculateBMI(p.height, p.weight)), 0) / arr.length).toFixed(1)
+    ? (arr.reduce((s, p) => s + parseFloat(getPatientBMI(p)), 0) / arr.length).toFixed(1)
     : '—';
 
   const bmiData = {
-    under: list.filter(p => getBMICategory(calculateBMI(p.height, p.weight)) === 'Underweight').length,
-    normal: list.filter(p => getBMICategory(calculateBMI(p.height, p.weight)) === 'Normal').length,
-    over: list.filter(p => getBMICategory(calculateBMI(p.height, p.weight)) === 'Overweight').length,
-    obese: list.filter(p => getBMICategory(calculateBMI(p.height, p.weight)) === 'Obese').length
+  under: list.filter(p => getPatientCategory(p) === 'Underweight').length,
+  normal: list.filter(p => getPatientCategory(p) === 'Normal').length,
+  over: list.filter(p => getPatientCategory(p) === 'Overweight').length,
+  obese: list.filter(p => getPatientCategory(p) === 'Obese').length
   };
   const totalFem50 = stats.female.filter(p => calculateAge(p.birthdate) >= 50).length;
 
