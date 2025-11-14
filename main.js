@@ -54,7 +54,11 @@ function getBMICategory(bmi) {
 const validators = {
   'first-name': v => /^[A-Za-z]{2,12}$/.test(v) || 'First name must be 2–12 letters.',
   'last-name': v => /^[A-Za-z][A-Za-z\'\-]{1,19}$/.test(v) || 'Last name must be 2–20 letters.',
-  'birthdate': v => v ? true : 'Enter a valid date.',
+  'birthdate': v => {
+  if (!v) return 'Enter a valid date.';
+  const age = calculateAge(v);
+  return (age >= 0 && age <= 120) || 'Age must be between 0 and 120.';
+},
   'height': v => parseFloat(v) >= 30 && parseFloat(v) <= 200 || 'Height 30–200 cm.',
   'weight': v => parseFloat(v) >= 1 && parseFloat(v) <= 200 || 'Weight 1–200 kg.',
   'sex': v => !!v || 'Select sex.',
