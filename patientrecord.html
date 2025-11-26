@@ -6,53 +6,58 @@
   <title>Patient Record System</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="logo.png" type="image/png" />
+</head>
 
 <body>
-  <header>
-     <img src="logo.png" alt="Logo" class="logo" type="image/png"/>
+  <header role="banner">
+     <img src="logo.png" alt="Patient Record System logo" class="logo" type="image/png"/>
     <h1>Patient Record System</h1>
   </header>
 
-  <main>
+  <main role="main">
     <!-- Add Patient Form -->
     <section id="patient-form-section">
       <h2>Add / Edit Patient</h2>
-      <form id="patient-form">
+      <p id="formHelp" class="sr-only">
+        All required fields must be filled. Errors will be announced automatically.
+      </p>
+
+      <form id="patient-form" aria-describedby="formHelp">
         <label for="first-name">First Name</label>
-        <input type="text" id="first-name" />
-        <span id="first-name-error" class="error-msg"></span>
+        <input type="text" id="first-name" required />
+        <span id="first-name-error" class="error-msg" aria-live="polite"></span>
 
         <label for="last-name">Last Name</label>
-        <input type="text" id="last-name" />
-        <span id="last-name-error" class="error-msg"></span>
+        <input type="text" id="last-name" required />
+        <span id="last-name-error" class="error-msg" aria-live="polite"></span>
 
         <label for="birthdate">Date of Birth</label>
-        <input type="date" id="birthdate" />
-        <span id="birthdate-error" class="error-msg"></span>
+        <input type="date" id="birthdate" required />
+        <span id="birthdate-error" class="error-msg" aria-live="polite"></span>
 
         <label for="height">Height (cm)</label>
-        <input type="number" id="height" />
-        <span id="height-error" class="error-msg"></span>
+        <input type="number" id="height" required />
+        <span id="height-error" class="error-msg" aria-live="polite"></span>
 
         <label for="weight">Weight (kg)</label>
-        <input type="number" id="weight" />
-        <span id="weight-error" class="error-msg"></span>
+        <input type="number" id="weight" required />
+        <span id="weight-error" class="error-msg" aria-live="polite"></span>
 
         <label for="sex">Sex</label>
-        <select id="sex">
+        <select id="sex" required>
           <option value="">Select...</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
-        <span id="sex-error" class="error-msg"></span>
+        <span id="sex-error" class="error-msg" aria-live="polite"></span>
 
         <label for="mobile">Mobile</label>
-        <input type="text" id="mobile" />
-        <span id="mobile-error" class="error-msg"></span>
+        <input type="text" id="mobile" required />
+        <span id="mobile-error" class="error-msg" aria-live="polite"></span>
 
         <label for="email">Email</label>
-        <input type="email" id="email" />
-        <span id="email-error" class="error-msg"></span>
+        <input type="email" id="email" required />
+        <span id="email-error" class="error-msg" aria-live="polite"></span>
 
         <label for="health-info">Notes</label>
         <textarea id="health-info"></textarea>
@@ -70,7 +75,7 @@
           type="text"
           id="search-query"
           placeholder="Search by name..."
-          aria-label="Search by name"
+          aria-label="Search patients by first or last name"
         />
 
         <!-- Filters row under search box -->
@@ -110,7 +115,7 @@
         </div>
       </form>
 
-      <ul id="search-results"></ul>
+      <ul id="search-results" role="list"></ul>
     </section>
 
     <!-- Statistics Section -->
@@ -124,17 +129,31 @@
         </div>
 
         <div class="charts-container">
-          <canvas id="bmiChart"></canvas>
-          <canvas id="sexChart"></canvas>
-          <canvas id="ageChart"></canvas>
+          <canvas id="bmiChart" role="img"
+            aria-label="BMI distribution chart showing the number of patients in each BMI category"></canvas>
+          <canvas id="sexChart" role="img"
+            aria-label="Patient distribution chart by sex"></canvas>
+          <canvas id="ageChart" role="img"
+            aria-label="Age distribution chart showing number of patients per age bracket"></canvas>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     <p>© 2025 Patient Record System</p>
   </footer>
+
+  <style>
+    
+    .sr-only {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: ;
+    }
+  </style>
 
   <script src="chart.umd.js"></script>
   <script src="charts.js"></script>

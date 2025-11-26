@@ -225,6 +225,7 @@ function displaySearchResults(results) {
       "#ef4444";
 
     const li = document.createElement('li');
+    li.setAttribute("role", "listitem");
     li.innerHTML = `
       <strong>${p.firstName} ${p.lastName}</strong>
       Age: ${calculateAge(p.birthdate)} | ${formatDateUK(p.birthdate)}<br>
@@ -243,6 +244,15 @@ function displaySearchResults(results) {
     li.querySelector('.delete-btn').onclick = () => {
       if (confirm(`Delete ${p.firstName} ${p.lastName}?`)) deletePatient(p.id);
     };
+    li.querySelector('.edit-btn').setAttribute(
+  "aria-label",
+  `Edit patient record for ${p.firstName} ${p.lastName}`
+);
+li.querySelector('.delete-btn').setAttribute(
+  "aria-label",
+  `Delete patient record for ${p.firstName} ${p.lastName}`
+);
+
 
     container.appendChild(li);
   });
