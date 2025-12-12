@@ -239,7 +239,7 @@ function displaySearchResults(results) {
       <button class="edit-btn">Edit</button>
       <button class="delete-btn">Delete</button>
     `;
-
+//test//
     li.querySelector('.edit-btn').onclick = () => editForm(p);
     li.querySelector('.delete-btn').onclick = () => {
       if (confirm(`Delete ${p.firstName} ${p.lastName}?`)) deletePatient(p.id);
